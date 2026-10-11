@@ -168,6 +168,16 @@ public sealed class HomePage : PageBase
             if (!st.Available) Root.Opacity = 0.55;
         }
 
+        private string? _lookingUp;
+
+        private async System.Threading.Tasks.Task LookUpAsync(string artist, string title)
+        {
+            _lookingUp = $"{artist}|{title}";
+            await Artwork.FindAsync(artist, title);
+            var (a, t) = _hub.OnAir(_st);
+            if (a == artist && t == title) Refresh(); // still the song on the air
+        }
+
         public void Refresh()
         {
             var p = _hub.Player;
@@ -175,7 +185,15 @@ public sealed class HomePage : PageBase
             _play.Update(mine ? p.Status : PlayStatus.Stopped, pauses: false);
             _play.Visibility = _st.Available ? Visibility.Visible : Visibility.Collapsed;
 
+            // Cover for the song on the air: the player's for the playing channel, otherwise
+            // looked up from the top of the channel's song history (same as Android and Debian).
+            var (artist, title) = _hub.OnAir(_st);
             string? cover = mine ? _hub.NowArt?.ImageUrl : null;
+            if (cover is null && title is not null && !string.IsNullOrEmpty(artist))
+            {
+                if (Artwork.TryCached(artist, title, out var known)) cover = known?.ImageUrl;
+                else if (_lookingUp != $"{artist}|{title}") _ = LookUpAsync(artist, title);
+            }
             _art.Set(cover, _st.Channel, Theme.FromHex(_st.Color));
 
             if (!_st.Available) { _now.Text = _st.Note ?? "Off the air for now"; return; }
@@ -184,7 +202,6 @@ public sealed class HomePage : PageBase
                 _now.Text = W.StatusText(p);
                 return;
             }
-            var (artist, title) = _hub.OnAir(_st);
             _now.Text = title is null ? _st.Description : string.IsNullOrEmpty(artist) ? title : $"{title} · {artist}";
         }
     }

@@ -18,7 +18,7 @@
     <!-- English only: skip the translated .NET/WPF error messages (13 languages). -->
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Product>HPR Radio</Product>
     <Company>KG4BHR</Company>
     <Description>Unofficial desktop player for Heartland Public Radio</Description>

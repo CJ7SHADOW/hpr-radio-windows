@@ -96,6 +96,11 @@ public static class SelfTest
         At(500, () =>
         {
             foreach (var st in hub.Catalog.Available)
+            {
+                var (ar, ti) = hub.OnAir(st);
+                Log.Write($"cover {st.Id}: {(ar is not null && ti is not null && Artwork.TryCached(ar, ti, out var c) ? c?.ImageUrl ?? "none found" : "not looked up")}");
+            }
+            foreach (var st in hub.Catalog.Available)
                 Log.Write($"recent {st.Id}: {(hub.Histories.TryGetValue(st.Id, out var t) ? $"{t.Count} {t[0].Artist} - {t[0].Title}" : "none")}");
             foreach (var show in hub.Catalog.Shows)
                 foreach (var src in show.Sources)
