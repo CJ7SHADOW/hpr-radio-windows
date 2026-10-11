@@ -67,7 +67,7 @@ without it.
 
 ## How it's built
 
-C# / .NET 10 / WPF. VLC's engine (LibVLC) does the playing. A silent Windows media player hooks into the
+C# / .NET 10 / WPF. VLC's engine (LibVLC) does the playing, trimmed to its audio parts by `tools/trim-vlc.ps1` (keeps the installer around 50 MB). A silent Windows media player hooks into the
 media keys and pop-up. Song titles and album art come from the station's Centova Cast song history,
 with album art looked up on iTunes, then Deezer.
 

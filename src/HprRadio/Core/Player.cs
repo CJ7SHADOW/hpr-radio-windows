@@ -106,7 +106,8 @@ public sealed class Player : IDisposable
             var modules = Environment.GetEnvironmentVariable("HPR_VLC_MODULES") is { Length: > 0 };
             _libvlc.Log += (_, e) =>
             {
-                if (e.Level >= LogLevel.Error) Log.Write($"vlc {e.Module}: {e.Message}");
+                // "option ... does not exist": video settings LibVLCSharp asks about; there's no video here.
+                if (e.Level >= LogLevel.Error && !e.Message.EndsWith("does not exist")) Log.Write($"vlc {e.Module}: {e.Message}");
                 else if (modules && (e.Message.StartsWith("using ") || e.Message.Contains("module \""))) Log.Write($"vlcmod {e.Module}: {e.Message}");
             };
         }
