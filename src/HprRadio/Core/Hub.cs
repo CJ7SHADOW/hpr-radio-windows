@@ -134,6 +134,7 @@ public sealed class ImageCache
     private readonly Dictionary<string, BitmapSource> _memory = new();
     private readonly LinkedList<string> _order = new();
     private readonly Dictionary<string, Task<BitmapSource?>> _inFlight = new();
+    private readonly Dictionary<string, long> _failedUntil = new();   // url -> TickCount64; don't retry for a minute
 
     public static string DiskPath(string url)
     {
@@ -152,6 +153,8 @@ public sealed class ImageCache
             return Task.FromResult<BitmapSource?>(hit);
         }
         if (_inFlight.TryGetValue(key, out var running)) return running;
+        if (_failedUntil.TryGetValue(url, out var until) && Environment.TickCount64 < until)
+            return Task.FromResult<BitmapSource?>(null);
         var task = LoadAsync(key, url, pixelWidth);
         _inFlight[key] = task;
         return task;
@@ -167,7 +170,11 @@ public sealed class ImageCache
             if (bytes is null)
             {
                 bytes = await Net.GetArtBytesAsync(url);
-                if (bytes is null) return null;
+                if (bytes is null)
+                {
+                    _failedUntil[url] = Environment.TickCount64 + 60_000;
+                    return null;
+                }
                 try { Directory.CreateDirectory(Paths.Art); await File.WriteAllBytesAsync(file, bytes); } catch { }
             }
             var data = bytes;
