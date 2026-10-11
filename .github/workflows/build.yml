@@ -39,6 +39,7 @@ jobs:
           $log = Get-Content selftest\live.log -Raw
           if ($log -match 'UNHANDLED') { Write-Host "::error::the app hit an unhandled exception"; exit 1 }
           if ($log -notmatch 'SELFTEST DONE') { Write-Host "::error::the self-test didn't finish"; exit 1 }
+          Get-Content selftest\live.log | Select-String -Pattern 'Exception' | ForEach-Object { Write-Host "::warning::$($_.Line)" }
           Get-Content selftest\live.log | Select-String -Pattern '^\[\s*[\d.]+\] (\[\d|recent|episodes|after|volume|playing|title|failure|retry)' |
             ForEach-Object { Write-Host "::notice::$($_.Line)" }
 
