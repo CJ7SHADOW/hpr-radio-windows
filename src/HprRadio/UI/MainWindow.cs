@@ -75,6 +75,7 @@ public sealed class MainWindow : Window
         Push(new HomePage(hub, this));
 
         hub.Player.Changed += UpdateChrome;
+        hub.NowArtChanged += UpdateChrome;
         PreviewKeyDown += OnKey;
         MouseDown += (_, e) => { if (e.ChangedButton == MouseButton.XButton1) { GoBack(); e.Handled = true; } };
         SourceInitialized += (_, _) => Theme.DarkTitleBar(this);
@@ -160,7 +161,7 @@ public sealed class MainWindow : Window
         _subtitle.Text = page.PageSubtitle ?? "";
         _subtitle.Visibility = page.PageSubtitle is null ? Visibility.Collapsed : Visibility.Visible;
         _bar.Visibility = page.HasOwnControls(_hub.Player) ? Visibility.Collapsed : Visibility.Visible;
-        Title = _hub.Player.IsActive && _hub.Player.SongTitle is { } t ? $"{t} · HPR Radio" : "HPR Radio";
+        Title = _hub.Player.IsActive && _hub.NowSong.Title is { } t ? $"{t} · HPR Radio" : "HPR Radio";
     }
 
     // ---- keyboard ------------------------------------------------------------------------------
@@ -325,6 +326,7 @@ public sealed class NowPlayingBar : Border
 
         hub.Player.Changed += Refresh;
         hub.NowArtChanged += Refresh;
+        hub.RecentChanged += _ => Refresh();
         Refresh();
     }
 
@@ -341,8 +343,9 @@ public sealed class NowPlayingBar : Border
         else if (p.Station is { } st)
         {
             _heading.Text = st.FullName;
-            _line.Text = p.Status == PlayStatus.Playing && p.SongTitle is not null
-                ? (p.SongArtist is null ? p.SongTitle : $"{p.SongTitle} · {p.SongArtist}")
+            var (artist, title) = _hub.NowSong;
+            _line.Text = p.Status == PlayStatus.Playing && title is not null
+                ? (string.IsNullOrEmpty(artist) ? title : $"{title} · {artist}")
                 : p.Status == PlayStatus.Stopped ? st.Description : W.StatusText(p);
             _art.Set(_hub.NowArt?.ImageUrl, st.Channel, Theme.FromHex(st.Color));
         }

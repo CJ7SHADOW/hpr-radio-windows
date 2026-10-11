@@ -107,6 +107,7 @@ public sealed class EpisodePage : PageBase
         var g = new Grid();
         g.Children.Add(W.Glyph(glyph, 22));
         var n = W.Text(label, 9, "Text", FontWeights.Bold);
+        n.FontFamily = new System.Windows.Media.FontFamily("Segoe UI");
         n.HorizontalAlignment = HorizontalAlignment.Center;
         n.VerticalAlignment = VerticalAlignment.Bottom;
         n.Margin = new Thickness(0, 0, 0, -14);

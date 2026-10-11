@@ -199,23 +199,40 @@ public sealed class ArtTile : Border
 /// <summary>The round accent play / pause / stop button.</summary>
 public sealed class PlayButton : Button
 {
-    private readonly TextBlock _glyph;
+    // Solid shapes (the icon font's play/pause/stop are outlines).
+    private static readonly Geometry PlayShape = Geometry.Parse("M 0,0 L 0,16 L 13.5,8 Z");
+    private static readonly Geometry PauseShape = Geometry.Parse("M 0,0 H 4.6 V 16 H 0 Z M 9.4,0 H 14 V 16 H 9.4 Z");
+    private static readonly Geometry StopShape = Geometry.Parse("M 1.5,0 H 12.5 A 1.5,1.5 0 0 1 14,1.5 V 12.5 A 1.5,1.5 0 0 1 12.5,14 H 1.5 A 1.5,1.5 0 0 1 0,12.5 V 1.5 A 1.5,1.5 0 0 1 1.5,0 Z");
+    private readonly System.Windows.Shapes.Path _shape;
+    private readonly double _size;
 
     public PlayButton(double size)
     {
+        _size = size;
         Width = Height = size;
         SetResourceReference(StyleProperty, "PlayButton");
-        _glyph = W.Glyph(W.Play, size * 0.36);
-        _glyph.SetResourceReference(TextBlock.ForegroundProperty, "OnAccent");
-        Content = _glyph;
+        _shape = new System.Windows.Shapes.Path { Stretch = Stretch.Uniform, Data = PlayShape };
+        _shape.SetResourceReference(System.Windows.Shapes.Shape.FillProperty, "OnAccent");
+        Content = _shape;
         VerticalAlignment = VerticalAlignment.Center;
+        SetShape(PlayShape);
+    }
+
+    private void SetShape(Geometry g)
+    {
+        _shape.Data = g;
+        var h = _size * (g == StopShape ? 0.28 : 0.32);
+        _shape.Height = h;
+        _shape.Width = h * (g == PlayShape ? 13.5 / 16 : g == PauseShape ? 14 / 16.0 : 1);
+        // A triangle looks centered when nudged right a little.
+        _shape.Margin = g == PlayShape ? new Thickness(_size * 0.06, 0, 0, 0) : new Thickness(0);
     }
 
     /// <summary>pauses: episodes pause; live channels stop.</summary>
     public void Update(PlayStatus status, bool pauses)
     {
         var active = status is PlayStatus.Connecting or PlayStatus.Playing or PlayStatus.Reconnecting;
-        _glyph.Text = active ? (pauses ? W.Pause : W.Stop) : W.Play;
+        SetShape(active ? (pauses ? PauseShape : StopShape) : PlayShape);
         var tip = active ? (pauses ? "Pause" : "Stop") : "Play";
         ToolTip = tip;
         System.Windows.Automation.AutomationProperties.SetName(this, tip);

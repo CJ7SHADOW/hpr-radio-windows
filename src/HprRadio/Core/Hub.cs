@@ -73,9 +73,14 @@ public sealed class Hub : IDisposable
             if (tracks is not null)
                 Histories[st.Id] = Core.Recent.Merge(Histories.TryGetValue(st.Id, out var old) ? old : null, tracks);
             RecentChanged?.Invoke(st.Id);
+            if (Player.IsLive && Player.Station?.Id == st.Id) OnPlayerChanged(); // song may have changed
         }
         finally { _fetching.Remove(st.Id); }
     }
+
+    /// <summary>The song on the channel that's playing (stream title, else its song history).</summary>
+    public (string? Artist, string? Title) NowSong =>
+        Player.IsLive && Player.Station is { } st ? OnAir(st) : (null, null);
 
     /// <summary>(artist, title) on the air now: the stream's own title if we're listening to
     /// this channel, otherwise the top of its song history.</summary>
@@ -92,7 +97,8 @@ public sealed class Hub : IDisposable
     private void OnPlayerChanged()
     {
         var p = Player;
-        var key = $"{p.IsLive}|{p.Station?.Id}|{p.SongArtist}|{p.SongTitle}|{p.Show?.Id}";
+        var (artist, title) = NowSong;
+        var key = $"{p.IsLive}|{p.Station?.Id}|{artist}|{title}|{p.Show?.Id}";
         if (key == _nowKey) return;
         _nowKey = key;
         NowArt = null;
@@ -102,8 +108,8 @@ public sealed class Hub : IDisposable
             NowArt = new Art(img, p.Show.Title);
             NowArtChanged?.Invoke();
         }
-        else if (p.IsLive && p.SongTitle is not null)
-            _ = LookUpNowArtAsync(key, p.SongArtist, p.SongTitle);
+        else if (p.IsLive && title is not null)
+            _ = LookUpNowArtAsync(key, artist, title);
     }
 
     private async Task LookUpNowArtAsync(string key, string? artist, string title)

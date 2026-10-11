@@ -99,8 +99,9 @@ public sealed class MediaControls : IDisposable
             }
             else if (p.Station is { } st)
             {
-                title = p.SongTitle ?? st.Name;
-                artist = p.SongTitle is not null ? p.SongArtist ?? "" : "Heartland Public Radio";
+                var (songArtist, songTitle) = _hub.NowSong;
+                title = songTitle ?? st.Name;
+                artist = songTitle is not null ? songArtist ?? "" : "Heartland Public Radio";
                 album = _hub.NowArt?.Album ?? st.FullName;
             }
             else return;
