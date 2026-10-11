@@ -254,7 +254,7 @@ public sealed class EpisodeRow
     private void ShowMenu(FrameworkElement anchor)
     {
         var pr = _hub.Progress.Get(_ep.Key);
-        var menu = new ContextMenu { PlacementTarget = anchor, Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom };
+        var menu = new ContextMenu { PlacementTarget = anchor, Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom, FontFamily = W.UiFont };
         void Add(string text, Action act)
         {
             var mi = new MenuItem { Header = text };

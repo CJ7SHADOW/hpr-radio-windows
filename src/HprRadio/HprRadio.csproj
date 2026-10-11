@@ -16,7 +16,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PlatformTarget>x64</PlatformTarget>
 
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Product>HPR Radio</Product>
     <Company>KG4BHR</Company>
     <Description>Unofficial desktop player for Heartland Public Radio</Description>

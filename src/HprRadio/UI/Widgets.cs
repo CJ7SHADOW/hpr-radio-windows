@@ -9,6 +9,10 @@ namespace HprRadio.UI;
 /// <summary>Small building blocks shared by the screens.</summary>
 public static class W
 {
+    /// <summary>Text font for menus and pop-ups, which otherwise inherit the icon font of the
+    /// button that opened them (and show boxes instead of letters).</summary>
+    public static readonly FontFamily UiFont = new("Segoe UI Variable Text, Segoe UI");
+
     public const string Play = "";
     public const string Pause = "";
     public const string Stop = "";

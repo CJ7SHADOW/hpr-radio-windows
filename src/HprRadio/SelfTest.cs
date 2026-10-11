@@ -23,6 +23,21 @@ public static class SelfTest
         void At(int ms, Action a) => steps.Add((ms, a));
         var p = hub.Player;
 
+        void ShotOf(string name, FrameworkElement el)
+        {
+            try
+            {
+                var rtb = new RenderTargetBitmap(Math.Max(1, (int)Math.Ceiling(el.ActualWidth)), Math.Max(1, (int)Math.Ceiling(el.ActualHeight)), 96, 96, PixelFormats.Pbgra32);
+                rtb.Render(el);
+                var enc = new PngBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(rtb));
+                using var f = File.Create(Path.Combine(outDir, name + ".png"));
+                enc.Save(f);
+                Log.Write($"[{name}] {el.ActualWidth:F0}x{el.ActualHeight:F0}");
+            }
+            catch (Exception e) { Log.Write($"screenshot {name} failed: {e.Message}"); }
+        }
+
         void Shot(string name)
         {
             Log.Write($"[{name}] catalog={hub.Catalog.Source} status={p.Status} song='{p.SongArtist} - {p.SongTitle}' " +
@@ -72,6 +87,10 @@ public static class SelfTest
             At(1500, () => Shot("7-show-progress"));
         }
         At(500, () => { w.Volume.Nudge(-0.2); Log.Write($"volume after nudge: {p.Volume:F3}"); });
+        At(500, () => w.Volume.Open());
+        At(1000, () => { ShotOf("9-volume-popup", w.Volume.PopupRoot); w.Volume.Open(); });
+        At(500, () => w.OpenMenu());
+        At(1000, () => { if (w.LastMenu is { } m) { ShotOf("10-menu", m); m.IsOpen = false; } });
         At(500, () => { Theme.Force(true); Theme.Apply(); });
         At(1500, () => Shot("8-dark"));
         At(500, () =>

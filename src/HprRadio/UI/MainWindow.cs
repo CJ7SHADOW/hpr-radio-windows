@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using HprRadio.Core;
@@ -21,6 +22,7 @@ public sealed class MainWindow : Window
     private readonly TextBlock _title;
     private readonly TextBlock _subtitle;
     private readonly NowPlayingBar _bar;
+    private readonly Button _menuButton;
     public VolumeButton Volume { get; }
 
     public MainWindow(Hub hub, MediaControls controls)
@@ -57,6 +59,7 @@ public sealed class MainWindow : Window
         header.Children.Add(Volume);
         var menu = W.IconButton(W.Menu, "Menu", () => { });
         menu.Click += (_, _) => ShowMenu(menu);
+        _menuButton = menu;
         Grid.SetColumn(menu, 3);
         header.Children.Add(menu);
         var headerBorder = new Border { Child = header, BorderThickness = new Thickness(0, 0, 0, 1) };
@@ -209,9 +212,15 @@ public sealed class MainWindow : Window
 
     // ---- menu ----------------------------------------------------------------------------------
 
+    /// <summary>The most recently opened main menu (for the self-test screenshots).</summary>
+    public ContextMenu? LastMenu { get; private set; }
+
+    public void OpenMenu() => ShowMenu(_menuButton);
+
     private void ShowMenu(FrameworkElement anchor)
     {
-        var m = new ContextMenu { PlacementTarget = anchor, Placement = PlacementMode.Bottom };
+        var m = new ContextMenu { PlacementTarget = anchor, Placement = PlacementMode.Bottom, FontFamily = W.UiFont };
+        LastMenu = m;
         void Add(string text, string? gesture, Action act)
         {
             var mi = new MenuItem { Header = text, InputGestureText = gesture ?? "" };
@@ -374,6 +383,11 @@ public sealed class VolumeButton : Button
     private readonly TextBlock _percent;
     private bool _updating;
 
+    /// <summary>The pop-up's contents (for the self-test screenshots).</summary>
+    public Border PopupRoot { get; }
+
+    public void Open() => _popup.IsOpen = true;
+
     public VolumeButton(Player player)
     {
         _player = player;
@@ -406,13 +420,14 @@ public sealed class VolumeButton : Button
         card.Effect = new System.Windows.Media.Effects.DropShadowEffect { BlurRadius = 16, ShadowDepth = 3, Opacity = 0.25 };
         _popup = new Popup
         {
-            Child = new Border { Child = card, Padding = new Thickness(10) },
+            Child = PopupRoot = new Border { Child = card, Padding = new Thickness(10) },
             PlacementTarget = this,
             Placement = PlacementMode.Bottom,
             StaysOpen = false,
             AllowsTransparency = true,
             PopupAnimation = PopupAnimation.Fade,
         };
+        TextElement.SetFontFamily(PopupRoot, W.UiFont);
         _popup.Opened += (_, _) => _slider.Focus();
         Click += (_, _) => _popup.IsOpen = !_popup.IsOpen;
         PreviewMouseWheel += (_, e) => { Nudge(e.Delta > 0 ? Step : -Step); e.Handled = true; };
