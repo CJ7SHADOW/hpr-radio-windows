@@ -31,7 +31,21 @@ jobs:
 
       # Plays the real HPR streams silently, loads song histories, cover art and Good 'N Country,
       # takes screenshots. Network hiccups on HPR's side don't fail the build, a crash does.
+      - name: What takes the space
+        run: |
+          $total = (Get-ChildItem publish -Recurse -File | Measure-Object Length -Sum).Sum
+          $vlc = (Get-ChildItem publish\libvlc -Recurse -File | Measure-Object Length -Sum).Sum
+          Write-Host "::notice::publish $([math]::Round($total/1MB)) MB, of which libvlc $([math]::Round($vlc/1MB)) MB, files: $((Get-ChildItem publish -Recurse -File).Count)"
+          Get-ChildItem publish -Recurse -File | Sort-Object Length -Descending | Select-Object -First 25 |
+            ForEach-Object { "{0,8:N1} MB  {1}" -f ($_.Length/1MB), $_.FullName.Substring($PWD.Path.Length + 9) } | Tee-Object sizes.txt
+          Get-ChildItem publish\libvlc\win-x64\plugins -Directory | ForEach-Object {
+            "{0,8:N1} MB  {1} ({2} files)" -f ((Get-ChildItem $_ -File | Measure-Object Length -Sum).Sum/1MB), $_.Name, (Get-ChildItem $_ -File).Count } | Tee-Object -Append sizes.txt
+          New-Item -ItemType Directory -Force selftest | Out-Null
+          Copy-Item sizes.txt selftest\
+
       - name: Self-test against the live HPR services
+        env:
+          HPR_VLC_MODULES: "1"
         run: |
           $p = Start-Process -FilePath publish\HprRadio.exe -ArgumentList '--selftest', "$PWD\selftest" -PassThru
           if (-not $p.WaitForExit(240000)) { Stop-Process $p -Force; Write-Host "::warning::self-test timed out" }

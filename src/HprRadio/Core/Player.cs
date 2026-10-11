@@ -101,7 +101,15 @@ public sealed class Player : IDisposable
             options.Add(aout == "dummy" ? "--aout=adummy" : "--aout=" + aout);
         _libvlc = new LibVLC(options.ToArray());
         if (Log.FilePath is not null)
-            _libvlc.Log += (_, e) => { if (e.Level >= LogLevel.Error) Log.Write($"vlc {e.Module}: {e.Message}"); };
+        {
+            // HPR_VLC_MODULES=1 also logs which VLC components get used (to keep only those).
+            var modules = Environment.GetEnvironmentVariable("HPR_VLC_MODULES") is { Length: > 0 };
+            _libvlc.Log += (_, e) =>
+            {
+                if (e.Level >= LogLevel.Error) Log.Write($"vlc {e.Module}: {e.Message}");
+                else if (modules && (e.Message.StartsWith("using ") || e.Message.Contains("module \""))) Log.Write($"vlcmod {e.Module}: {e.Message}");
+            };
+        }
         _mp = new VlcPlayer(_libvlc);
         _mp.Playing += (_, _) => Post(OnPlaying);
         _mp.EndReached += (_, _) => Post(() => OnFailure("ended"));
