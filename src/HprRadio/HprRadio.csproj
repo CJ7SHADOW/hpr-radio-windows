@@ -15,8 +15,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PlatformTarget>x64</PlatformTarget>
-    <!-- LibVLCSharp still names the old "win10-x64" style runtimes. -->
-    <UseRidGraph>true</UseRidGraph>
 
     <Version>1.0.0</Version>
     <Product>HPR Radio</Product>
@@ -31,8 +29,8 @@
   <ItemGroup>
     <!-- VLC's engine plays the streams: it handles Shoutcast/Icecast quirks, gives song
          titles (ICY), and can run with a silent audio output for automated tests. -->
-    <PackageReference Include="LibVLCSharp" Version="3.8.2" />
-    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.20" />
+    <PackageReference Include="LibVLCSharp" Version="3.10.1" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.23.1" />
   </ItemGroup>
 
   <ItemGroup>
