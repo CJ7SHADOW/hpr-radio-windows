@@ -15,6 +15,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PlatformTarget>x64</PlatformTarget>
+    <!-- English only: skip the translated .NET/WPF error messages (13 languages). -->
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 
     <Version>1.0.1</Version>
     <Product>HPR Radio</Product>

@@ -27,7 +27,10 @@ jobs:
           Write-Host "Version $v"
 
       - name: Build
-        run: dotnet publish src/HprRadio/HprRadio.csproj -c Release -r win-x64 --self-contained true -p:DebugType=none -o publish
+        run: |
+          dotnet publish src/HprRadio/HprRadio.csproj -c Release -r win-x64 --self-contained true -p:DebugType=none -o publish
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          ./tools/trim-vlc.ps1 publish
 
       # Plays the real HPR streams silently, loads song histories, cover art and Good 'N Country,
       # takes screenshots. Network hiccups on HPR's side don't fail the build, a crash does.
