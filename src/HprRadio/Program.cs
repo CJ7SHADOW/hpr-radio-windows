@@ -43,6 +43,9 @@ public static class Program
         }
 
         var app = new App { ShutdownMode = ShutdownMode.OnMainWindowClose };
+        // So anything awaited from here on comes back to the UI thread, even before app.Run().
+        SynchronizationContext.SetSynchronizationContext(
+            new System.Windows.Threading.DispatcherSynchronizationContext(app.Dispatcher));
 #pragma warning disable WPF0001
         app.ThemeMode = ThemeMode.System;   // Windows 11 style for scroll bars, menus, expanders
 #pragma warning restore WPF0001
@@ -89,9 +92,13 @@ public static class Program
         }) { IsBackground = true };
         if (selfTest is null) waiter.Start();
 
-        window.Show();
-        hub.Start();
-        if (selfTest is not null) SelfTest.Run(app, hub, window, selfTest);
+        // Network work starts once the message loop is running.
+        app.Startup += (_, _) =>
+        {
+            window.Show();
+            hub.Start();
+            if (selfTest is not null) SelfTest.Run(app, hub, window, selfTest);
+        };
         return app.Run();
     }
 }
