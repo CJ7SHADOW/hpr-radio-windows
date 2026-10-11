@@ -1,0 +1,135 @@
+[   0.7] vlcmod main: using audio output module "adummy"
+[   0.7] vlc ready 3.0.23 Vetinari
+[   1.4] net ok 366285B in 0.3s https://hpr.org/wp-content/uploads/2020/06/goodncountry.png
+[   1.4] net ok 3016B in 0.0s https://hpr.org/apps/android/channels.json?t=29861477
+[   1.9] net ok 2585B in 0.4s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[   1.9] net ok 2600B in 0.4s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[   1.9] net ok 2680B in 0.5s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[   2.1] net ok 4725B in 0.2s https://itunes.apple.com/search?term=Bluegrass%20Cardinals%20Crossing%20Of%20Jordan&media=music&entity=song&limit=10
+[   2.2] net ok 65420B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music/0e/a4/8b/mzi.ciqdfoyn.jpg/600x600bb.jpg
+[   2.2] net ok 14549B in 0.3s https://itunes.apple.com/search?term=Marty%20Robbins%20Ribbon%20Of%20Darkness&media=music&entity=song&limit=10
+[   2.2] net ok 112018B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Features/57/61/f0/dj.vslltgfw.jpg/600x600bb.jpg
+[   2.3] net ok 16256B in 0.4s https://itunes.apple.com/search?term=Conway%20Twitty%20I%27ve%20Already%20Loved%20You%20In%20My%20Mind&media=music&entity=song&limit=10
+[   2.3] net ok 78985B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/c9/d0/cd/c9d0cd62-dc51-84cb-f597-49702ed62193/00076742085827.rgb.jpg/600x600bb.jpg
+[   9.4] [1-home] catalog=live from server status=Stopped song=' - ' art=none pos=0/0 vol=0.343
+[  10.0] start #1 https://us2.maindigitalstream.com/ssl/7713
+[  10.0] vlcmod main: removing module "adummy"
+[  10.0] vlcmod main: using timeshift granularity of 50 MiB
+[  10.0] vlcmod main: using timeshift path: C:\Users\RUNNER~1\AppData\Local\Temp
+[  10.0] vlcmod gnutls: using GnuTLS version 3.8.10
+[  10.2] vlcmod main: using tls client module "gnutls"
+[  10.5] vlcmod main: using access module "access"
+[  10.5] vlcmod prefetch: using 16777216 bytes buffer, 16777216 bytes read
+[  10.5] vlcmod main: using stream_filter module "prefetch"
+[  10.5] vlcmod main: using stream_filter module "record"
+[  10.5] vlcmod main: using packetizer module "mpegaudio"
+[  10.5] vlcmod main: using demux module "es"
+[  10.5] vlcmod main: using audio decoder module "mpg123"
+[  10.5] playing #1
+[  10.5] vlcmod main: using audio output module "adummy"
+[  10.5] vlcmod main: using audio volume module "float_mixer"
+[  10.5] vlcmod main: using audio filter module "scaletempo"
+[  10.5] vlcmod main: using audio resampler module "ugly"
+[  20.4] net ok 2680B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[  20.4] net ok 2600B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[  20.4] net ok 2585B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[  25.0] [2-home-playing] catalog=live from server status=Playing song=' - ' art=https://is1-ssl.mzstatic.com/image/thumb/Features/57/61/f0/dj.vslltgfw.jpg/600x600bb.jpg pos=0/0 vol=0.343
+[  25.7] net ok 2680B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[  25.7] net ok 2600B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[  25.7] net ok 2585B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[  25.7] net ok 15440B in 0.2s https://itunes.apple.com/search?term=Charley%20Pride%20Just%20Between%20You%20And%20Me&media=music&entity=song&limit=10
+[  25.7] net ok 15428B in 0.2s https://itunes.apple.com/search?term=Johnny%20Horton%20The%20Battle%20Of%20New%20Orleans&media=music&entity=song&limit=10
+[  25.7] net ok 15030B in 0.2s https://itunes.apple.com/search?term=Lefty%20Frizzell%20Run%20%27Em%20Off&media=music&entity=song&limit=10
+[  25.7] net ok 15429B in 0.0s https://itunes.apple.com/search?term=Statler%20Brothers%20I%20Was%20There&media=music&entity=song&limit=10
+[  25.7] net ok 14361B in 0.3s https://itunes.apple.com/search?term=Jim%20Ed%20Brown%20Man%20And%20Wife%20Time&media=music&entity=song&limit=10
+[  25.9] net ok 15356B in 0.2s https://itunes.apple.com/search?term=Tammy%20Wynette%20I%20Don%27t%20Want%20To%20Play%20House&media=music&entity=song&limit=10
+[  25.9] net ok 76487B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/63/d0/3b/63d03b37-23e5-7126-00cf-5df1782c3072/886973347027.jpg/600x600bb.jpg
+[  25.9] net ok 166304B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music/7f/38/9c/mzi.cwbprpyk.jpg/600x600bb.jpg
+[  25.9] net ok 88775B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music2/v4/69/95/04/69950416-5c23-008c-51ee-1f18d7cd5438/886443975071.jpg/600x600bb.jpg
+[  25.9] net ok 84196B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/75/65/b9/7565b9f0-a3f1-5124-7045-bb08981e053d/00602577172755.rgb.jpg/600x600bb.jpg
+[  25.9] net ok 14040B in 0.2s https://itunes.apple.com/search?term=Bill%20Anderson%20Wild%20Week-End&media=music&entity=song&limit=10
+[  25.9] net ok 75557B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/e2/c4/1e/e2c41e9d-a762-e2ef-945e-4478a8e48522/886447546277.jpg/600x600bb.jpg
+[  25.9] net ok 120810B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music127/v4/a5/4c/40/a54c4028-126a-ff4d-e062-a961e17cb37b/886446404332.jpg/600x600bb.jpg
+[  26.0] net ok 96692B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/2b/ce/89/2bce8925-2a99-adf4-203c-28ec215cf9c5/22UMGIM38900.rgb.jpg/600x600bb.jpg
+[  26.0] net ok 12545B in 0.2s https://itunes.apple.com/search?term=Webb%20Pierce%20Back%20Street%20Affair&media=music&entity=song&limit=10
+[  26.0] net ok 79909B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/c7/28/c8/c728c837-ebf1-7f1b-e11d-ebf59fc378fa/00008811244224.rgb.jpg/600x600bb.jpg
+[  26.1] net ok 16227B in 0.4s https://itunes.apple.com/search?term=George%20Morgan%20Room%20Full%20Of%20Roses&media=music&entity=song&limit=10
+[  26.1] net ok 139087B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music62/v4/b2/5d/c3/b25dc374-2334-23f7-9730-4696cf644ef2/886445773668.jpg/600x600bb.jpg
+[  32.5] [3-channel] catalog=live from server status=Playing song=' - ' art=https://is1-ssl.mzstatic.com/image/thumb/Features/57/61/f0/dj.vslltgfw.jpg/600x600bb.jpg pos=0/0 vol=0.343
+[  33.9] net ok 31238B in 0.3s https://hpr.org/wp-json/wp/v2/pages/225?_fields=content
+[  33.9] net ok 187312B in 0.4s https://hpr.org/wp-json/wp/v2/pages/4250?_fields=content
+[  40.4] net ok 2680B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[  40.4] net ok 2602B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[  40.4] net ok 2585B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[  40.6] net ok 15526B in 0.2s https://itunes.apple.com/search?term=Keith%20Urban%20Better%20Life&media=music&entity=song&limit=10
+[  40.6] net ok 122240B in 0.0s https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/8c/f3/72/8cf372a3-54e0-a458-9848-fbe15b77e98c/16UMGIM23471.rgb.jpg/600x600bb.jpg
+[  43.5] [4-show] catalog=live from server status=Playing song=' - ' art=https://is1-ssl.mzstatic.com/image/thumb/Features/57/61/f0/dj.vslltgfw.jpg/600x600bb.jpg pos=0/0 vol=0.343
+[  44.0] episodes on page: 39
+[  44.1] start #2 https://archive.org/download/good-n-country-10-10-2026/Good%20%27N%20Country%2010-10-2026.mp3
+[  44.1] vlcmod main: removing module "mpg123"
+[  44.1] vlcmod main: removing module "ugly"
+[  44.1] vlcmod main: removing module "scaletempo"
+[  44.1] vlcmod main: removing module "float_mixer"
+[  44.1] vlcmod main: removing module "es"
+[  44.1] vlcmod main: removing module "mpegaudio"
+[  44.1] vlcmod main: removing module "record"
+[  44.1] vlcmod main: removing module "prefetch"
+[  44.1] vlcmod main: removing module "access"
+[  44.1] vlc http: local stream 1 error: Cancellation (0x8)
+[  44.1] vlcmod main: removing module "adummy"
+[  44.1] vlcmod main: using timeshift granularity of 50 MiB
+[  44.1] vlcmod main: using timeshift path: C:\Users\RUNNER~1\AppData\Local\Temp
+[  44.1] vlcmod gnutls: using GnuTLS version 3.8.10
+[  44.3] vlcmod main: using tls client module "gnutls"
+[  44.6] vlc http: local stream 1 error: Cancellation (0x8)
+[  44.6] vlcmod gnutls: using GnuTLS version 3.8.10
+[  44.7] vlcmod main: using tls client module "gnutls"
+[  45.2] vlcmod main: using access module "access"
+[  45.2] vlcmod prefetch: using 16777216 bytes buffer, 16777216 bytes read
+[  45.2] vlcmod main: using stream_filter module "prefetch"
+[  45.2] vlcmod main: using stream_filter module "record"
+[  45.2] vlcmod main: using packetizer module "mpegaudio"
+[  45.2] vlcmod main: using demux module "es"
+[  45.2] vlcmod main: using audio decoder module "mpg123"
+[  45.2] playing #2
+[  45.2] vlcmod main: using audio output module "adummy"
+[  45.2] vlcmod main: using audio volume module "float_mixer"
+[  45.2] vlcmod main: using audio filter module "scaletempo"
+[  45.2] vlcmod main: using audio resampler module "ugly"
+[  59.1] [5-episode] catalog=live from server status=Playing song=' - ' art=https://hpr.org/wp-content/uploads/2020/06/goodncountry.png pos=14/7228 vol=0.343
+[  60.0] vlc http: local stream 1 error: Cancellation (0x8)
+[  60.4] net ok 2680B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[  60.4] net ok 2602B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[  60.4] net ok 2585B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[  65.6] after seek to 600: pos=606 status=Playing
+[  68.1] after pause: pos=606 status=Paused
+[  68.6] playing #2
+[  74.6] after resume: pos=612 status=Playing
+[  74.6] [6-episode-seeked] catalog=live from server status=Playing song=' - ' art=https://hpr.org/wp-content/uploads/2020/06/goodncountry.png pos=612/7228 vol=0.343
+[  76.6] [7-show-progress] catalog=live from server status=Playing song=' - ' art=https://hpr.org/wp-content/uploads/2020/06/goodncountry.png pos=614/7228 vol=0.343
+[  77.2] volume after nudge: 0.125
+[  78.7] [9-volume-popup] 334x72
+[  80.2] [10-menu] 201x162
+[  80.4] net ok 2602B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr2hi&charset=&mountpoint=&rid=hpr2hi&limit=15
+[  80.4] net ok 2680B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr4hi&charset=&mountpoint=&rid=hpr4hi&limit=15
+[  80.4] net ok 2585B in 0.2s https://us2.maindigitalstream.com:2199/external/rpc.php?m=recenttracks.get&username=hpr1hi&charset=&mountpoint=&rid=hpr1hi&limit=15
+[  82.2] [8-dark] catalog=live from server status=Playing song=' - ' art=https://hpr.org/wp-content/uploads/2020/06/goodncountry.png pos=619/7228 vol=0.125
+[  82.7] cover hpr1: https://is1-ssl.mzstatic.com/image/thumb/Features/57/61/f0/dj.vslltgfw.jpg/600x600bb.jpg
+[  82.7] cover hpr2: https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/8c/f3/72/8cf372a3-54e0-a458-9848-fbe15b77e98c/16UMGIM23471.rgb.jpg/600x600bb.jpg
+[  82.7] cover hpr4: https://is1-ssl.mzstatic.com/image/thumb/Music/0e/a4/8b/mzi.ciqdfoyn.jpg/600x600bb.jpg
+[  82.7] recent hpr1: 10 Marty Robbins - Ribbon Of Darkness
+[  82.7] recent hpr2: 11 Keith Urban - Better Life
+[  82.7] recent hpr4: 10 Bluegrass Cardinals - Crossing Of Jordan
+[  82.7] episodes goodncountry/Recent episodes: 39
+[  82.7] episodes goodncountry/Archive: 275
+[  82.7] SELFTEST DONE
+[  82.8] vlcmod main: removing module "mpg123"
+[  82.8] vlcmod main: removing module "ugly"
+[  82.8] vlcmod main: removing module "scaletempo"
+[  82.8] vlcmod main: removing module "float_mixer"
+[  82.8] vlcmod main: removing module "es"
+[  82.8] vlcmod main: removing module "mpegaudio"
+[  82.8] vlcmod main: removing module "record"
+[  82.8] vlcmod main: removing module "prefetch"
+[  82.8] vlcmod main: removing module "access"
+[  82.8] vlc http: local stream 3 error: Cancellation (0x8)
