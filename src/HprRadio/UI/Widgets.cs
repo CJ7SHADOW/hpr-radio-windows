@@ -187,12 +187,16 @@ public sealed class ArtTile : Border
 
     private async System.Threading.Tasks.Task LoadAsync(string url)
     {
-        var dpi = VisualTreeHelper.GetDpi(this).DpiScaleX;
-        var bmp = await _images.GetAsync(url, (int)Math.Ceiling(_size * Math.Max(1, dpi)));
-        if (url != _url) return; // something else was set meanwhile
-        if (bmp is null) return;
-        Background = new ImageBrush(bmp) { Stretch = Stretch.UniformToFill };
-        _badge.Visibility = Visibility.Collapsed;
+        try
+        {
+            // Twice the size: sharp on high-DPI screens, and the same cache entry everywhere.
+            var bmp = await _images.GetAsync(url, (int)Math.Ceiling(_size * 2));
+            if (url != _url) return; // something else was set meanwhile
+            if (bmp is null) { Log.Write($"art tile: no image for {url}"); return; }
+            Background = new ImageBrush(bmp) { Stretch = Stretch.UniformToFill };
+            _badge.Visibility = Visibility.Collapsed;
+        }
+        catch (Exception e) { Log.Write($"art tile {_size}: {e.GetType().Name} {e.Message}"); }
     }
 }
 
